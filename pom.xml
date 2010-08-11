@@ -1,0 +1,125 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>scala-training</groupId>
+  <artifactId>scala-training-parent</artifactId>
+  <name>Scala Training Parent POM</name>
+  <version>1.0</version>
+  <packaging>pom</packaging>
+  <inceptionYear>2009</inceptionYear>
+  
+  <properties>
+    <scala.version>2.8.0</scala.version>
+  </properties>
+
+  <modules>
+    <module>labs</module>
+    <module>solutions</module>
+  </modules>
+
+  <repositories>
+    <repository>
+      <id>scala-tools-snapshots</id>
+      <name>Scala-Tools Maven2 Snapshot Repository</name>
+      <url>http://scala-tools.org/repo-snapshots</url>
+    </repository>
+    <repository>
+      <id>scala-tools</id>
+      <name>Scala-Tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </repository>
+    <repository>
+      <id>lag</id>
+      <name>Configgy's' Repository</name>
+      <url>http://www.lag.net/repo</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>scala-tools.org</id>
+      <name>Scala-Tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <build>
+    <sourceDirectory>src/main/scala</sourceDirectory>
+    <testSourceDirectory>src/test/scala</testSourceDirectory>
+    
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.0.2</version>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+        <version>2.10.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <jvmArgs>
+            <jvmArg>-Xmx1024m</jvmArg>
+          </jvmArgs>
+          <scalaVersion>${scala.version}</scalaVersion>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-idea-plugin</artifactId>
+        <configuration>
+          <downloadSources>true</downloadSources>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <configuration>
+          <downloadSources>true</downloadSources>
+          <excludes>
+            <exclude>org.scala-lang:scala-library</exclude>
+          </excludes>
+          <classpathContainers>
+            <classpathContainer>ch.epfl.lamp.sdt.launching.SCALA_CONTAINER</classpathContainer>
+          </classpathContainers>
+          <projectnatures>
+            <java.lang.String>ch.epfl.lamp.sdt.core.scalanature</java.lang.String>
+            <java.lang.String>org.eclipse.jdt.core.javanature</java.lang.String>
+          </projectnatures>
+          <buildcommands>
+            <java.lang.String>ch.epfl.lamp.sdt.core.scalabuilder</java.lang.String>
+          </buildcommands>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+        <configuration>
+          <scalaVersion>${scala.version}</scalaVersion>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+</project>
