@@ -2,7 +2,8 @@ package scalatraining.actors
 
 import java.util.Date
 
-import se.scalablesolutions.akka.actor.ActorRef._
+import se.scalablesolutions.akka.actor.Actor._
+import se.scalablesolutions.akka.actor.ActorRef
 
 import org.scalatest.junit.JUnitSuite
 import org.junit.{After, Before, Test}

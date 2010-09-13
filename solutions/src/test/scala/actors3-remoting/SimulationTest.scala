@@ -2,7 +2,8 @@ package scalatraining.actors.remote
 
 import java.util.Date
 
-import se.scalablesolutions.akka.actor.ActorRef._
+import se.scalablesolutions.akka.actor.Actor._
+import se.scalablesolutions.akka.actor.ActorRef
 
 import org.scalatest.junit.JUnitSuite
 import org.junit.{After, Before, Test}
@@ -12,9 +13,7 @@ class SimulationTest extends JUnitSuite {
   val portSFO = new Port("San Francisco")
   val portLA = new Port("Los Angeles")
   val portYYV = new Port("Vancouver")
-  val shipKR = actorOf(new Ship("King Roy", portYYV)).start
-
-  shipKR = (eventProcessor !! NewShip("King Roy", portYYV)).getOrElse(throw new IllegalStateException("Could not create a new ship"))
+  val shipKR = (eventProcessor !! NewShip("King Roy", portYYV)).getOrElse(throw new IllegalStateException("Could not create a new ship")).asInstanceOf[ActorRef]
 
   @Test def runSimulation = {
     println("\n===> arrivalSetsShipsLocation")

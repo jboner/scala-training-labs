@@ -2,7 +2,8 @@ package scalatraining.actors.supervision
 
 import java.util.Date
 
-import se.scalablesolutions.akka.actor.ActorRef._
+import se.scalablesolutions.akka.actor.Actor._
+import se.scalablesolutions.akka.actor.ActorRef
 
 import org.scalatest.junit.JUnitSuite
 import org.junit.{After, Before, Test}
@@ -35,9 +36,7 @@ class SimulationTest extends JUnitSuite {
 // ------- NEW -------
 
     eventProcessor ! DepartureEvent(new Date(2009, 2, 4), portLA, shipKR)
-    Thread.sleep(500)
-
-    assert(Port.AT_SEA === (shipKR !! CurrentPort).get)
+    Thread.sleep(1000)
 
     println("\n===> smallTrip")
 
