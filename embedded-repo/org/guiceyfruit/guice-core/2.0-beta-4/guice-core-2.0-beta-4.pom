@@ -1,0 +1,142 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.guiceyfruit</groupId>
+    <artifactId>guice</artifactId>
+    <version>2.0-beta-4</version>
+  </parent>
+  <artifactId>guice-core</artifactId>
+  <version>2.0-beta-4</version>
+  <packaging>jar</packaging>
+  <name>guice-core</name>
+  <dependencies>
+    <dependency>
+      <groupId>com.google.code.google-collections</groupId>
+      <artifactId>google-collect</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>asm</groupId>
+      <artifactId>asm</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>aopalliance</groupId>
+      <artifactId>aopalliance</artifactId>
+    </dependency>
+
+      <!-- test dependencies -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+      <!--  ... spring is here ONLY for PerformanceComparison test: -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>**/*$*Test.*</exclude>
+            <!-- TODO FIXME ASAP -->
+            <exclude>**/BytecodeGenTest.*</exclude>
+            <exclude>**/BinderTest.*</exclude>
+            <exclude>**/ScopesTest.*</exclude>
+            <exclude>**/ParentInjectorTest.*</exclude>
+            <exclude>**/OverrideModuleTest.*</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      
+      <!-- generate the attached tests jar -->
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.2</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <excludes>
+<!--            <exclude>com/google/inject/*/**.class</exclude>
+            <exclude>com/googlecode/**/*</exclude>
+-->          </excludes>
+        </configuration>
+      </plugin>
+      
+      <!-- 
+        At this time, there is no proper JarJar Links plugin for Maven, so the 
+        only option is to use maven-antrun-plugin with JarJar. JarJar can only 
+        output as .jar files, thus a temporary .jar file is created and then 
+        unzip it over the previous target/classes directory.      
+      -->
+      <!--
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <property name="libs" value="../../guice-external/lib/build/" />
+                <taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" classpath="${libs}/jarjar-1.0rc7.jar" />
+                <jarjar jarfile="${project.build.directory}/${project.build.finalName}-jarjar.jar">
+                  <fileset dir="${project.build.outputDirectory}" />
+                  <zipfileset src="${libs}/cglib-2.2.jar" />
+                  <zipfileset src="${libs}/asm-3.1.jar" />
+                  <zipfileset src="${libs}/google-collect-snapshot-20080530.jar" />
+                  <rule pattern="com.google.common.**" result="org.guiceyfruit.internal.@1" />
+                  <rule pattern="net.sf.cglib.**" result="org.guiceyfruit.internal.cglib.@1" />
+                  <rule pattern="org.objectweb.asm.**" result="org.guiceyfruit.internal.asm.@1" />
+                  <keep pattern="org.guiceyfruit.**" />
+                </jarjar>
+                <delete dir="${project.build.outputDirectory}" />
+                <unjar src="${project.build.directory}/${project.build.finalName}-jarjar.jar" dest="${project.build.outputDirectory}">
+                  <patternset>
+                    <include name="**/*.class" />
+                    <exclude name="*" />
+                  </patternset>
+                </unjar>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    -->
+    </plugins>
+  </build>
+</project>

@@ -10,35 +10,15 @@
   <packaging>jar</packaging>
   <inceptionYear>2009</inceptionYear>
   
+  <parent>
+    <groupId>scala-training</groupId>
+    <artifactId>scala-training-parent</artifactId>
+    <version>1.0</version>
+  </parent>
+  
   <properties>
     <scala.version>2.8.0</scala.version>
   </properties>
-
-  <repositories>
-    <repository>
-      <id>scala-tools-snapshots</id>
-      <name>Scala-Tools Maven2 Snapshot Repository</name>
-      <url>http://scala-tools.org/repo-snapshots</url>
-    </repository>
-    <repository>
-      <id>scala-tools</id>
-      <name>Scala-Tools Maven2 Repository</name>
-      <url>http://scala-tools.org/repo-releases</url>
-    </repository>
-    <repository>
-      <id>lag</id>
-      <name>Configgy's' Repository</name>
-      <url>http://www.lag.net/repo</url>
-    </repository>
-  </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>scala-tools.org</id>
-      <name>Scala-Tools Maven2 Repository</name>
-      <url>http://scala-tools.org/repo-releases/</url>
-    </pluginRepository>
-  </pluginRepositories>
 
   <dependencies>
     <dependency>
@@ -46,6 +26,11 @@
       <artifactId>scala-library</artifactId>
       <version>${scala.version}</version>
     </dependency>
+	<dependency>
+	  <groupId>se.scalablesolutions.akka</groupId>
+	  <artifactId>akka-core_2.8.0</artifactId>
+	  <version>0.10</version>
+	</dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest</artifactId>

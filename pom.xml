@@ -15,11 +15,16 @@
   </properties>
 
   <modules>
-    <module>labs</module>
+    <!--module>labs</module-->
     <module>solutions</module>
   </modules>
 
   <repositories>
+    <repository>
+      <id>embedded</id>
+      <name>Embedded Repo</name>
+      <url>file://${env.SCALA_TRANING_HOME}/embedded-repo</url>
+    </repository>
     <repository>
       <id>scala-tools-snapshots</id>
       <name>Scala-Tools Maven2 Snapshot Repository</name>
@@ -30,11 +35,7 @@
       <name>Scala-Tools Maven2 Repository</name>
       <url>http://scala-tools.org/repo-releases</url>
     </repository>
-    <repository>
-      <id>lag</id>
-      <name>Configgy's' Repository</name>
-      <url>http://www.lag.net/repo</url>
-    </repository>
+
   </repositories>
 
   <pluginRepositories>
