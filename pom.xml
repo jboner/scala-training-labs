@@ -15,7 +15,7 @@
   </properties>
 
   <modules>
-    <!--module>labs</module-->
+    <module>labs</module>
     <module>solutions</module>
   </modules>
 

@@ -20,7 +20,6 @@ import se.scalablesolutions.akka.config.ScalaConfig._
  */
 sealed trait Event
 
-case object Reset extends Event
 case object CurrentPort extends Event
 
 case object Replay extends Event

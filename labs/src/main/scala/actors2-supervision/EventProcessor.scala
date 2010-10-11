@@ -16,7 +16,8 @@ import se.scalablesolutions.akka.config.ScalaConfig._
  *  - link the Ship to the EventProcessor
  *  - run the Simulation and see the ships being killed and restarted
  */
-object EventProcessor extends Actor {
+class EventProcessor extends Actor {
+
   private var eventLog: List[StateChangeEvent] = Nil
 
   def receive = {

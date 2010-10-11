@@ -24,7 +24,6 @@ import se.scalablesolutions.akka.config.ScalaConfig._
 
 case class NewShip(shipName: String, destination: Port) extends Event
 
-case object Reset extends Event
 case object CurrentPort extends Event
 
 case object Replay extends Event

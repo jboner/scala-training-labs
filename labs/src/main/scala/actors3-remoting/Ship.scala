@@ -2,8 +2,7 @@ package scalatraining.actors.remote
 
 import java.util.Date
 
-import se.scalablesolutions.akka.actor.Actor
-import se.scalablesolutions.akka.actor.Actor.Sender.Self
+import se.scalablesolutions.akka.actor.{Actor, ActorRef}
 import se.scalablesolutions.akka.config.ScalaConfig._
 
 /**
@@ -12,7 +11,6 @@ import se.scalablesolutions.akka.config.ScalaConfig._
  * Your task is to:
  *  - make the Event base trait @serializable
  *  - add handler for the NewShip(name, port) message in the Ship which will set the name and port
- *  - remove the constructor in Ship
  *  - start a RemoteServer in the EventProcessor
  *  - add handler for the NewShip(name, port) message in the EventProcessor, which should:
  *    - create the Ship on a remote host (localhost is fine)
@@ -21,11 +19,8 @@ import se.scalablesolutions.akka.config.ScalaConfig._
  *    - reply with the newly created Ship
  *  - run the Simulation and see the transparent management of the remote ship
  */
-sealed trait Event
+@serializable sealed trait Event
 
-case class NewShip(shipName: String, destination: Port) extends Event
-
-case object Reset extends Event
 case object CurrentPort extends Event
 
 case object Replay extends Event
@@ -38,11 +33,11 @@ abstract case class StateChangeEvent(val occurred: Date) extends Event {
   def process: Unit
 }
 
-case class DepartureEvent(val time: Date, val port: Port, val ship: Ship) extends StateChangeEvent(time) {
+case class DepartureEvent(val time: Date, val port: Port, val ship: ActorRef) extends StateChangeEvent(time) {
   override def process = ship ! DepartureEvent(time, port, null)
 }
 
-case class ArrivalEvent(val time: Date, val port: Port, val ship: Ship) extends StateChangeEvent(time) {
+case class ArrivalEvent(val time: Date, val port: Port, val ship: ActorRef) extends StateChangeEvent(time) {
   override def process = ship ! ArrivalEvent(time, port, null)
 }
 
@@ -51,7 +46,6 @@ case class ArrivalEvent(val time: Date, val port: Port, val ship: Ship) extends 
 // =============================
 
 class Ship extends Actor {
-  lifeCycle = Some(LifeCycle(Permanent))
 
   private var shipName: String = _
   private var currentDestination: Port = _
@@ -65,11 +59,8 @@ class Ship extends Actor {
       log.info("%s DEPARTED from port %s @ %s", toString, port, time)
       currentDestination = Port.AT_SEA
 
-    case Reset =>
-      log.info("%s has been reset", toString)
-
     case CurrentPort =>
-      reply(currentDestination)
+      self.reply(currentDestination)
 
     case Sink =>
       throw new RuntimeException("I'm killed: " + this)

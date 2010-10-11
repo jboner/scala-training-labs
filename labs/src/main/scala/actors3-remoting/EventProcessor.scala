@@ -3,7 +3,7 @@ package scalatraining.actors.remote
 import se.scalablesolutions.akka.actor.Actor
 import se.scalablesolutions.akka.config.OneForOneStrategy
 import se.scalablesolutions.akka.config.ScalaConfig._
-import se.scalablesolutions.akka.remote.RemoteServer
+import se.scalablesolutions.akka.remote.RemoteNode
 
 /**
  * Actors Lab 3: Remote actors.
@@ -20,14 +20,13 @@ import se.scalablesolutions.akka.remote.RemoteServer
  *    - reply with the newly created Ship
  *  - run the Simulation and see the transparent management of the remote ship
  */
-object EventProcessor extends Actor {
-  faultHandler = Some(OneForOneStrategy(5, 5000))
-  trapExit = List(classOf[Throwable])
-  start
+class EventProcessor extends Actor {
+  self.faultHandler = Some(OneForOneStrategy(5, 5000))
+  self.trapExit = List(classOf[Throwable])
   
   private var eventLog: List[StateChangeEvent] = Nil
 
-  def receive = {
+  def receive: PartialFunction[Any, Unit] = {
     case event: StateChangeEvent =>
       event.process
       eventLog ::= event
@@ -37,7 +36,7 @@ object EventProcessor extends Actor {
 
     case ReplayUpTo(date) =>
       eventLog.reverse.filter(_.occurred.getTime <= date.getTime).foreach(_.process)
-    
+
     case unknown =>
       log.error("Unknown event: %s", unknown)
   }

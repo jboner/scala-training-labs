@@ -56,16 +56,12 @@ class SimulationTest extends JUnitSuite {
 
     println("\n===> resetAndReplayEventLog")
 
-    shipKR ! Reset
-
     eventProcessor ! Replay
     Thread.sleep(500)
 
     assert(portSFO === (shipKR !! CurrentPort).get)
 
     println("\n===> resetAndReplayEventLogUpToDate")
-
-    shipKR ! Reset
 
     eventProcessor ! ReplayUpTo(new Date(2009, 2, 4))
     Thread.sleep(500)
