@@ -1,0 +1,12 @@
+1. 
+Set the SCALA_TRANING_HOME to the root of this training code module. For example: 
+export SCALA_TRANING_HOME=`pwd`
+
+2. 
+Try to build and run tests:
+mvn test
+
+3. 
+Uncomment the 'labs' module in the ./pom.xml file. Run again. Now tests should fail:
+mvn test
+

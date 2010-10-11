@@ -68,9 +68,6 @@ class Ship extends Actor {
       log.info("%s DEPARTED from port %s @ %s", toString, port, time)
       currentDestination = Port.AT_SEA
 
-    case Reset =>
-      log.info("%s has been reset", toString)
-
     case CurrentPort =>
       self.reply(currentDestination)
 
