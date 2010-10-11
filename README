@@ -1,12 +1,22 @@
-1. 
-Set the SCALA_TRANING_HOME to the root of this training code module. For example: 
+=========================================
+=====SCALA TRAINING LAB INSTRUCTIONS=====
+=========================================
+
+The Scala training labs are divided into two modules:
+* labs
+* solutions
+
+You do your work in 'labs' and can check the 'solutions' for ideas on how to implement a solution.
+All labs are test-driven, so you workflow is something like this: 
+
+1. Uncomment the test in the lab you want to work on (in the 'labs' module)
+2. Run 'mvn test' and see it fail
+3. Fix the test so it compiles and passes 
+
+All labs have instructions on what you should do in the ScalaDoc in the code. 
+
+Before you start working you need to set the SCALA_TRANING_HOME to the root of this training code module. For example:
+cd scala-training
 export SCALA_TRANING_HOME=`pwd`
 
-2. 
-Try to build and run tests:
-mvn test
-
-3. 
-Uncomment the 'labs' module in the ./pom.xml file. Run again. Now tests should fail:
-mvn test
-
+Enjoy, Jonas. 
