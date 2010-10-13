@@ -6,7 +6,7 @@ import java.io._
  * Lab 6:  Understanding Scala call-by-name by writing a ARM (Automatic Resource Management) method.
  */
 object Lab6 {
-  val FILE_NAME = "/Users/jboner/src/scala/scala-training/solutions/src/test/resources/lab6.properties"
+  val FILE_NAME = "/Users/jboner/src/scala/scala-training-labs/solutions/src/test/resources/lab6.properties"
 
   /**
    * Read lines from file. Traditional way with resource cleanup etc.
