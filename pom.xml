@@ -20,12 +20,11 @@
   </modules>
 
   <repositories>
-    <repository>
+    <!--repository>
       <id>embedded</id>
       <name>Embedded Repo</name>
       <url>file:///Users/jboner/src/scala/scala-training-labs/embedded-repo</url>
-      <!--url>file://${env.SCALA_TRANING_HOME}/embedded-repo</url-->
-    </repository>
+    </repository-->
     <repository>
       <id>scala-tools-snapshots</id>
       <name>Scala-Tools Maven2 Snapshot Repository</name>

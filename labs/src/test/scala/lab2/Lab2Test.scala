@@ -58,7 +58,7 @@ class Lab2Test extends JUnitSuite {
   }
 
   @Test
-  def listContainsTwoOddElements() {
+  def listContainsThreeOddElements() {
     assert(List(1, 3, 5) === Lab2.oddElements(List(1, 2, 3, 4, 5)))
   }
 */

@@ -6,22 +6,27 @@ import java.io._
  * Lab 6:  Understanding Scala call-by-name by writing a ARM (Automatic Resource Management) method.
  */
 object Lab6 {
-  val FILE_NAME = "/Users/jboner/src/scala/scala-training-labs/solutions/src/test/resources/lab6.properties"
+  val FILE_NAME = "./src/test/resources/lab6.properties"
 
   /**
    * Read lines from file. Traditional way with resource cleanup etc.
    */
-  def readFromFile: List[String] = {
-    var stream: DataInputStream = null
-    var lines = List[String]()
-    try {
-      stream = new DataInputStream(new BufferedInputStream(new FileInputStream(new File(FILE_NAME))))
-      while (stream.available != 0) lines ::= stream.readLine
-    } finally {
-      stream.close
-    }
-    lines
-  }
+   def readFromFile: List[String] = {
+     var stream: BufferedReader = null
+     var lines = List[String]()                              
+     var line: String = null
+     try {
+       stream = new BufferedReader(new FileReader(FILE_NAME))
+       line = stream.readLine
+       while(line ne null) {
+         lines ::= line
+         line = stream.readLine
+       }
+     } finally {
+       stream.close
+     }
+     lines
+   }
 
   /**
    * Your task is to write a ARM (Automatic Resource Managment) method, that works with code like below.
