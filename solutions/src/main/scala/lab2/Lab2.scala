@@ -3,7 +3,7 @@ package scalatraining.lab2
 object Lab2 {
   def firstElementInList[T](l: List[T]): T = {
     //buildin
-      l.first
+      l.head
   }
 
   def lastElementInList[T](l: List[T]): T = {
@@ -31,7 +31,7 @@ object Lab2 {
   }
 
   def sortList(list: List[String]):List[String] = {
-    list.sort(_ < _)
+    list.sortWith(_ < _)
   }
   
   def elementExists(theList: List[String], elementToSearchFor: String): Boolean = {

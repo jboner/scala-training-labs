@@ -18,7 +18,11 @@ class Lab6Test extends JUnitSuite {
   def shouldReadFromFileUsingARM() {
     val lines: List[String] = withDataInputStream(FILE_NAME) { stream =>
       var lines: List[String] = Nil
-      while (stream.available != 0) lines ::= stream.readLine
+      var line = stream.readLine
+      while(line ne null) {
+        lines ::= line
+        line = stream.readLine
+      }
       lines
     }
     assert(lines.reverse === List("one=1","two=2","three=3","four=4","five=5"))

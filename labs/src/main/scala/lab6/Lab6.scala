@@ -11,17 +11,22 @@ object Lab6 {
   /**
    * Read lines from file. Traditional way with resource cleanup etc.
    */
-  def readFromFile: List[String] = {
-    var stream: DataInputStream = null
-    var lines = List[String]()
-    try {
-      stream = new DataInputStream(new BufferedInputStream(new FileInputStream(new File(FILE_NAME))))
-      while (stream.available != 0) lines ::= stream.readLine
-    } finally {
-      stream.close
-    }
-    lines
-  }
+   def readFromFile: List[String] = {
+     var stream: BufferedReader = null
+     var lines = List[String]()                              
+     var line: String = null
+     try {
+       stream = new BufferedReader(new FileReader(FILE_NAME))
+       line = stream.readLine
+       while(line ne null) {
+         lines ::= line
+         line = stream.readLine
+       }
+     } finally {
+       stream.close
+     }
+     lines
+   }
 
   /**
    * Your task is to write a ARM (Automatic Resource Managment) method, that works with code like below.
