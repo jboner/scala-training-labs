@@ -41,6 +41,7 @@ class Lab4Test extends JUnitSuite {
 
   @Test
   def shouldGetAttendeesFromDocument() {
+    assert(getAttendeesFromDocument(training).size === attendees.size)
     assert(getAttendeesFromDocument(training).zip(attendees).find(t => t._1 != t._2).isEmpty)
   }
 }

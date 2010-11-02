@@ -24,7 +24,7 @@ class Lab1Test extends JUnitSuite {
   import Lab1._
 
   @Test def shouldDoNothing = assert(true)
-  
+
 /*
   @Test
   def shouldSayHelloFromClass() {
